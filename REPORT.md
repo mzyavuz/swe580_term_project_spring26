@@ -14,7 +14,7 @@ This project investigates that question empirically. Using a provided evaluation
 - **Configuration A** — 4 coarse-grained tools with rich, flexible parameters
 - **Configuration B** — 9 fine-grained tools with simple, focused parameters
 
-Both configurations use the same Whoosh full-text search backend, the same vault, and the same evaluation queries. Only the tool interface and system prompt differ. I chose **Option 2: Direct API Function Calling** using the OpenRouter API, with Google Gemini 2.5 Flash as the primary model.
+Both configurations use the same Whoosh full-text search backend, the same vault, and the same evaluation queries. Only the tool interface and system prompt differ.
 
 For extra credit, I also implemented note creation (synthesis) tools and compared results across two models: Gemini 2.5 Flash and Gemini 2.5 Pro.
 
@@ -105,7 +105,7 @@ Each query has a fixed ground truth (correct note paths). Success requires retur
 
 ### 3.4 Implementation Choice
 
-I used **Option 2: Direct API Function Calling** via OpenRouter (OpenAI-compatible endpoint). The LLM receives tool definitions in JSON, decides which tools to call, and the evaluator executes them against the Whoosh backend. The evaluation loop supports up to 10 rounds of tool calling per query.
+ The LLM receives tool definitions in JSON, decides which tools to call, and the evaluator executes them against the Whoosh backend. The evaluation loop supports up to 10 rounds of tool calling per query.
 
 Primary model: `google/gemini-2.5-flash`. Comparison model: `google/gemini-2.5-pro`.
 
