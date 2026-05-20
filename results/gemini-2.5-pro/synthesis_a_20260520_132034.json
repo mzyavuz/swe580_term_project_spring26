@@ -1,0 +1,87 @@
+{
+  "config": "Config A",
+  "results": [
+    {
+      "query_id": "s01",
+      "query": "Create a new research note titled 'Attention Survey' that summarizes the key ideas from the Transformers, Self Attention, and Attention Mechanisms notes.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "research/Attention_Survey.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "folder": "research",
+            "tags": [
+              "research",
+              "attention",
+              "summary",
+              "transformer"
+            ],
+            "content": "# Attention Survey\n\nThis note summarizes the key concepts behind modern attention-based neural network architectures, based on the ideas in [[Attention Mechanisms]], [[Self Attention]], and [[Transformers]].\n\n## Core Idea: Attention\n\nThe core concept of attention, as detailed in [[Attention Mechanisms]], is to allow a model to focus on the most relevant parts of the input sequence when producing an output. This is achieved by computing a set of attention scores over the input and using these scores to create a weighted sum of the input values. The most common formulation is Scaled Dot-Product Attention:\n\n`Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V`\n\n## Self-Attention and the Transformer\n\nThe [[Transformers|Transformer]] architecture, introduced in \"Attention Is All You Need,\" revolutionized sequence modeling by replacing recurrence entirely with attention mechanisms. The key innovation is [[Self Attention]], a variant where the queries, keys, and values are all derived from the same input sequence. This allows the model to weigh the importance of all other words in the sequence for a given word, capturing rich contextual dependencies.\n\nHowever, the major drawback of self-attention is its O(n\u00b2) computational and memory complexity with respect to sequence length `n`.\n\nKey components of the Transformer architecture include:\n- **Multi-Head Attention**: Running the attention mechanism multiple times in parallel to attend to different representation subspaces.\n- **Positional Encodings**: Injecting information about token positions, since the architecture itself does not process sequences sequentially.\n- **Feed-Forward Networks**: Applied to each position after the attention layers.\n\nTransformers have become the foundation for most modern large language models due to their parallelizability and high performance.",
+            "title": "Attention Survey"
+          }
+        }
+      ],
+      "total_tool_calls": 4,
+      "total_tokens": 9893,
+      "rounds": 3,
+      "response_preview": "A new research note titled 'Attention Survey' has been created, summarizing the key ideas from the Transformers, Self Attention, and Attention Mechanisms notes.\n\nRESULT_PATHS: [\"research/Attention_Survey.md\"]"
+    },
+    {
+      "query_id": "s02",
+      "query": "Write a new reference note called 'Deep Learning Glossary' defining the most important terms from my deep-learning tagged research notes.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "reference/Deep_Learning_Glossary.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "tags": [
+              "deep-learning,reference,glossary"
+            ],
+            "folder": "reference",
+            "title": "Deep Learning Glossary",
+            "content": "This note summarizes key terms from various research notes tagged with 'deep-learning'.\n\n## Attention Mechanisms\nAllows neural networks to focus on relevant parts of the input when producing output. The core building block of the transformer architecture. See [[Attention Mechanisms]].\n\n- **Self-Attention**: A special case of attention where queries, keys, and values all come from the same sequence, enabling the model to capture dependencies within a single input. See [[Self Attention]].\n\n## BERT (Bidirectional Encoder Representations from Transformers)\nA foundational NLP model that uses a bidirectional [[Transformers]] encoder to learn general-purpose language representations. It is pre-trained using Masked Language Modeling (MLM). See [[BERT]].\n\n## Contrastive Learning\nA self-supervised learning technique that trains a model to map similar (positive) inputs close together in an embedding space and dissimilar (negative) inputs far apart. See [[Contrastive Learning]].\n\n## CNN (Convolutional Neural Network)\nThe backbone of modern computer vision, which learns hierarchical features through stacked layers of convolutions and pooling. See [[CNN Architecture]].\n\n## GAN (Generative Adversarial Network)\nA framework for generative modeling where a \"generator\" network tries to produce realistic samples and a \"discriminator\" network tries to distinguish them from real ones. See [[GAN Architecture]].\n\n## GNN (Graph Neural Network)\nA class of neural networks designed to work with graph-structured data, operating on the principle of \"message passing\" between nodes. See [[Graph Neural Networks]].\n\n## GPT (Generative Pre-trained Transformer)\nA family of autoregressive language models based on the [[Transformers]] decoder architecture. They are pre-trained to predict the next token and excel at text generation and in-context learning. See [[GPT]].\n\n## Knowledge Distillation\nA model compression technique where a smaller \"student\" model is trained to mimic the outputs (specifically the soft probability distributions) of a larger, pre-trained \"teacher\" model. See [[Knowledge Distillation]].\n\n## Optimization Methods\nTechniques used to train neural networks.\n- **SGD (Stochastic Gradient Descent)**: The foundational optimization algorithm.\n- **Adam / AdamW**: The default adaptive learning rate optimizers for most modern deep learning tasks.\n- **Learning Rate Scheduling**: The practice of varying the learning rate during training, often involving a \"warmup\" period followed by a \"decay\".\nSee [[Optimization Methods]].\n\n## Transformers\nA neural network architecture that replaced recurrence (RNNs) with multi-head [[Self Attention]]. It is the foundation for most modern large language models. See [[Transformers]]."
+          }
+        }
+      ],
+      "total_tool_calls": 12,
+      "total_tokens": 26439,
+      "rounds": 4,
+      "response_preview": "I have created a new reference note, \"Deep Learning Glossary,\" by synthesizing the key terms from your existing research notes tagged with \"deep-learning\".\n\nRESULT_PATHS: [\"reference/Deep_Learning_Glossary.md\"]"
+    },
+    {
+      "query_id": "s03",
+      "query": "Create a new project note for a 'Transformer Fine Tuner' project that builds on the Transformers and BERT research and links to the Fine Tuning Pipeline project.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "projects/Transformer_Fine_Tuner.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "content": "This project focuses on fine-tuning [[Transformers]] models, particularly [[BERT]], for specific downstream tasks. It will leverage the existing [[Fine Tuning Pipeline]].",
+            "tags": [
+              "project",
+              "transformer",
+              "nlp"
+            ],
+            "title": "Transformer Fine Tuner",
+            "folder": "projects"
+          }
+        }
+      ],
+      "total_tool_calls": 4,
+      "total_tokens": 12302,
+      "rounds": 3,
+      "response_preview": "I've created the new project note \"Transformer Fine Tuner\" for you. It builds on the Transformers and BERT research and links to the Fine Tuning Pipeline project note.\n\nRESULT_PATHS: [\"projects/Transformer_Fine_Tuner.md\"]"
+    }
+  ],
+  "notes_created": 3,
+  "total_queries": 3
+}

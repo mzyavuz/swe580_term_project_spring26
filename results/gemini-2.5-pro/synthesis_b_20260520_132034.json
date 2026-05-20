@@ -1,0 +1,90 @@
+{
+  "config": "Config B",
+  "results": [
+    {
+      "query_id": "s01",
+      "query": "Create a new research note titled 'Attention Survey' that summarizes the key ideas from the Transformers, Self Attention, and Attention Mechanisms notes.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "research/Attention_Survey.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "folder": "research",
+            "content": "# Attention Survey\n\nThis note summarizes the key concepts behind attention mechanisms, as detailed in the [[Attention Mechanisms]], [[Self Attention]], and [[Transformers]] notes.\n\n## Core Idea\n\nAttention mechanisms enable a model to focus on relevant parts of an input sequence. The most common formulation is Scaled Dot-Product Attention, defined as:\n\n`Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V`\n\nThis computes a weighted sum of `Value` vectors based on the compatibility of `Query` and `Key` vectors.\n\n## Self-Attention\n\n[[Self Attention]] is a specific type of attention where the Queries, Keys, and Values all derive from the same input sequence. This allows the model to weigh the importance of all other tokens in the sequence for a given token, capturing internal contextual relationships. The main drawback is its O(n\u00b2) computational cost.\n\n## The Transformer\n\nThe [[Transformers|Transformer architecture]], introduced in \"Attention Is All You Need\", is a model that uses [[Self Attention]] as its core component, completely replacing recurrent layers. This allows for greater parallelization and has become the foundation for modern NLP models like BERT and GPT. Key components include Multi-Head Attention and Positional Encodings.",
+            "title": "Attention Survey",
+            "tags": [
+              "attention",
+              "transformer",
+              "deep-learning",
+              "nlp",
+              "survey"
+            ]
+          }
+        }
+      ],
+      "total_tool_calls": 4,
+      "total_tokens": 11404,
+      "rounds": 3,
+      "response_preview": "RESULT_PATHS: [\"research/Attention_Survey.md\"]"
+    },
+    {
+      "query_id": "s02",
+      "query": "Write a new reference note called 'Deep Learning Glossary' defining the most important terms from my deep-learning tagged research notes.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "reference/Deep_Learning_Glossary.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "tags": [
+              "deep-learning",
+              "glossary",
+              "reference"
+            ],
+            "title": "Deep Learning Glossary",
+            "content": "# Deep Learning Glossary\n\nThis note defines key deep learning terms based on information from research notes in this vault.\n\n## Attention Mechanism\nA mechanism that enables a model to focus on relevant parts of an input sequence by computing a weighted sum of value vectors based on query-key compatibility. The Transformer architecture is built upon this concept.\n*Source: [[Attention Survey]]*\n\n## BERT (Bidirectional Encoder Representations from Transformers)\nA model architecture based on the encoder part of the [[Transformers]] architecture. It uses bidirectional self-attention to learn representations from both the left and right context of a token. It is pre-trained using Masked Language Modeling and is highly effective for fine-tuning on various NLP tasks.\n*Source: [[BERT]]*\n\n## Contrastive Learning\nA self-supervised learning method that trains a model to place similar (positive) inputs close together in an embedding space while pushing dissimilar (negative) inputs far apart. This is used to learn representations without labels.\n*Source: [[Contrastive Learning]]*\n\n## GAN (Generative Adversarial Network)\nA framework for generative modeling where a *generator* network tries to create realistic data samples and a *discriminator* network tries to distinguish real samples from fake ones. They are powerful but can be unstable to train.\n*Source: [[GAN Architecture]]*\n\n## GPT (Generative Pre-trained Transformer)\nA family of autoregressive language models based on the decoder part of the [[Transformers]] architecture. It uses causal (left-to-right) attention, making it particularly well-suited for text generation tasks.\n*Source: [[GPT]]*\n\n## Knowledge Distillation\nA model compression technique where a smaller \"student\" model is trained to mimic the output (specifically, the soft probability distributions) of a larger, pre-trained \"teacher\" model. This allows for creating faster, smaller models that retain much of the original's performance.\n*Source: [[Knowledge Distillation]]*\n\n## Transformer\nAn architecture that replaces sequence-based recurrence (RNNs) with multi-head [[Self Attention]]. It is the foundation for most modern large language models, including [[BERT]] and [[GPT]], due to its parallelizability and scaling properties.\n*Source: [[Transformers]]*\n",
+            "folder": "reference"
+          }
+        }
+      ],
+      "total_tool_calls": 13,
+      "total_tokens": 30777,
+      "rounds": 5,
+      "response_preview": "RESULT_PATHS: [\"reference/Deep_Learning_Glossary.md\"]"
+    },
+    {
+      "query_id": "s03",
+      "query": "Create a new project note for a 'Transformer Fine Tuner' project that builds on the Transformers and BERT research and links to the Fine Tuning Pipeline project.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "projects/Transformer_Fine_Tuner.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "tags": [
+              "project",
+              "transformer",
+              "nlp"
+            ],
+            "title": "Transformer Fine Tuner",
+            "content": "# Project: Transformer Fine Tuner\n\nThis project is dedicated to creating a flexible and powerful tool for fine-tuning transformer models.\n\n## Core Ideas\n\nThe project builds directly on the foundational research in [[research/Transformers.md]] and [[research/BERT.md]]. The goal is to apply these concepts in a practical, reusable way.\n\n## Implementation\n\nThe implementation will heavily leverage the existing [[projects/Fine_Tuning_Pipeline.md]], extending it with new features specific to the latest models, such as parameter-efficient fine-tuning (PEFT) methods like LoRA.\n",
+            "folder": "projects"
+          }
+        }
+      ],
+      "total_tool_calls": 4,
+      "total_tokens": 12207,
+      "rounds": 3,
+      "response_preview": "RESULT_PATHS: [\"projects/Transformer_Fine_Tuner.md\"]"
+    }
+  ],
+  "notes_created": 3,
+  "total_queries": 3
+}

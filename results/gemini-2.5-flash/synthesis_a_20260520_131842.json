@@ -1,0 +1,87 @@
+{
+  "config": "Config A",
+  "results": [
+    {
+      "query_id": "s01",
+      "query": "Create a new research note titled 'Attention Survey' that summarizes the key ideas from the Transformers, Self Attention, and Attention Mechanisms notes.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "research/Attention_Survey.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "folder": "research",
+            "tags": [
+              "attention",
+              "deep-learning",
+              "survey"
+            ],
+            "content": "# Attention Survey\n\nThis note summarizes key ideas across various attention mechanisms, with a focus on their role in [[Transformers]].\n\n## Core Concepts\n\n- **Attention Mechanisms** allow models to focus on relevant parts of input. They were initially developed for machine translation and have since become ubiquitous in deep learning. Key types include Scaled Dot-Product Attention (central to Transformers), Additive Attention, and Cross-Attention.\n\n- **Self-Attention** is a crucial specific form of attention where queries, keys, and values are derived from the same input sequence. This enables the model to weigh the importance of different tokens within the sequence, forming contextual representations. While powerful, its computational cost is quadratic (O(n\u00b2)), which can be a limitation for very long sequences. Efforts to mitigate this include sparse attention patterns and hardware optimizations like Flash Attention.\n\n- **Transformers** are an architecture that entirely replaces recurrence with self-attention mechanisms. Introduced in \"Attention Is All You Need,\" they have become the backbone of modern large language models. Key components include Multi-Head Attention (allowing focus on different representation subspaces), Positional Encoding (to inject sequence order information), and Feed-Forward Networks. Transformers excel due to their parallelizability and ability to scale.\n\n## Interconnections\n\nThe Transformer architecture heavily relies on [[Self_Attention]] and the broader principles of [[Attention_Mechanisms]]. Multi-Head Attention, a core component of Transformers, applies attention across different representation subspaces.\n\n## Future Directions\n\nResearch continues into reducing the computational complexity of self-attention and exploring alternative positional encoding schemes, among other areas.\n",
+            "title": "Attention Survey"
+          }
+        }
+      ],
+      "total_tool_calls": 4,
+      "total_tokens": 8417,
+      "rounds": 3,
+      "response_preview": "RESULT_PATHS: [\"research/Attention_Survey.md\"]"
+    },
+    {
+      "query_id": "s02",
+      "query": "Write a new reference note called 'Deep Learning Glossary' defining the most important terms from my deep-learning tagged research notes.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "reference/Deep_Learning_Glossary.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "folder": "reference",
+            "title": "Deep Learning Glossary",
+            "tags": [
+              "deep-learning",
+              "glossary"
+            ],
+            "content": "# Deep Learning Glossary\n\nThis note defines key terms encountered in deep learning research notes.\n\n## Attention Mechanisms\nAllow models to focus on relevant parts of input data, weighing their importance. A core component of [[Transformers]].\n\n## Autoencoders\nNeural networks trained to reconstruct their input. Used for dimensionality reduction and learning efficient data codings.\n\n## Backpropagation\nThe central algorithm for training neural networks, calculating gradients of the loss function with respect to the model's weights.\n\n## BERT (Bidirectional Encoder Representations from Transformers)\nA transformer-based model known for its bidirectional processing of text, enabling deep contextual understanding. Pre-trained with Masked Language Modeling and Next Sentence Prediction. See [[BERT]].\n\n## Convolutional Neural Network (CNN)\nA class of neural networks primarily used for analyzing visual imagery. They use convolutional layers to detect patterns. See [[CNN Architecture]].\n\n## Contrastive Learning\nA self-supervised learning approach where a model learns to pull similar examples closer in an embedding space and push dissimilar ones further apart. See [[Contrastive Learning]].\n\n## Generative Adversarial Network (GAN)\nA generative model architecture consisting of a generator and a discriminator that are trained in opposition to each other to produce realistic data samples. See [[GAN Architecture]].\n\n## GPT (Generative Pre-trained Transformer)\nA family of autoregressive language models that use a transformer decoder to generate text by predicting the next token in a sequence. See [[GPT]].\n\n## Knowledge Distillation\nA technique where a smaller \"student\" model is trained to mimic the behavior of a larger \"teacher\" model, often for model compression and efficiency. See [[Knowledge Distillation]].\n\n## Learning Rate (LR)\nA hyperparameter that determines the step size at each iteration while moving toward a minimum of a loss function during optimization.\n\n## Message Passing\nThe core mechanism in Graph Neural Networks (GNNs), where nodes aggregate information from their neighbors to update their representations. See [[Graph Neural Networks]].\n\n## Optimization Methods\nAlgorithms used to minimize (or maximize) objective functions, such as the loss function in neural networks, including SGD, Adam, and AdamW. See [[Optimization Methods]].\n\n## Self-Attention\nA mechanism within attention models that relates different positions of a single sequence to compute a representation of the sequence. Crucial for [[Transformers]].\n\n## Stochastic Gradient Descent (SGD)\nAn iterative optimization algorithm that updates model parameters using the gradient of the loss function computed on a mini-batch of data.\n\n## Transformers\nAn influential neural network architecture that eschews recurrence and convolutions in favor of self-attention mechanisms, widely used in NLP and increasingly in computer vision. See [[Transformers]].\n"
+          }
+        }
+      ],
+      "total_tool_calls": 12,
+      "total_tokens": 22837,
+      "rounds": 4,
+      "response_preview": "RESULT_PATHS: [\"reference/Deep_Learning_Glossary.md\"]"
+    },
+    {
+      "query_id": "s03",
+      "query": "Create a new project note for a 'Transformer Fine Tuner' project that builds on the Transformers and BERT research and links to the Fine Tuning Pipeline project.",
+      "note_created_via_tool": true,
+      "file_exists_on_disk": true,
+      "note_in_index": true,
+      "expected_path": "projects/Transformer_Fine_Tuner.md",
+      "create_tool_calls": [
+        {
+          "tool": "create_note",
+          "arguments": {
+            "folder": "projects",
+            "title": "Transformer Fine Tuner",
+            "tags": [
+              "project",
+              "transformer",
+              "fine-tuning"
+            ],
+            "content": "This project focuses on fine-tuning Transformer models. It builds upon research from [[Transformers]] and [[BERT]] notes. The fine-tuning process will link to the [[Fine Tuning Pipeline]] project note."
+          }
+        }
+      ],
+      "total_tool_calls": 1,
+      "total_tokens": 3891,
+      "rounds": 2,
+      "response_preview": "RESULT_PATHS: [\"projects/Transformer_Fine_Tuner.md\"]"
+    }
+  ],
+  "notes_created": 3,
+  "total_queries": 3
+}

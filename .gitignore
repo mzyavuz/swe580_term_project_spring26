@@ -2,5 +2,5 @@ vault/.whoosh_index/
 __pycache__/
 *.pyc
 venv/
-results/
 .env
+CLAUDE.md
