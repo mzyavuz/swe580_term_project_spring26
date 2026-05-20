@@ -1,6 +1,8 @@
 # SWE 580 - Applied Large Language Models | Term Project
 **M. Zeynep Çakmakcı**
 
+**Instructor: Atay Özgövde**
+
 ---
 
 ## 1. Introduction
