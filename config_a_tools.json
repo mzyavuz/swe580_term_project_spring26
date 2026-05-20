@@ -3,26 +3,26 @@
     "type": "function",
     "function": {
       "name": "search_notes",
-      "description": "Search notes in the vault.",
+      "description": "Search notes by content, tags, and/or date range. All parameters are optional but at least one should be provided. Use tags to filter by category (e.g. tags=[\"meeting\"] for meeting notes, tags=[\"project\"] for project notes). Multiple tags use AND logic — only notes matching all tags are returned. Use date_from/date_to for time-based queries; a single day query should use the same date for both. Combine parameters to narrow results (e.g. tags + date range together). Returns up to 10 matching notes with path, title, tags, and dates.",
       "parameters": {
         "type": "object",
         "properties": {
           "query": {
             "type": "string",
-            "description": "Text to search for."
+            "description": "Full-text search query. Use for topic or content-based searches. Do NOT use this for category names like 'meeting notes' or 'research notes' — use tags instead."
           },
           "tags": {
             "type": "array",
             "items": {"type": "string"},
-            "description": "Filter by tags."
+            "description": "Filter by tags using AND logic. Tag values are lowercase strings like 'meeting', 'project', 'journal', 'reference', 'deep-learning', 'nlp', 'python', 'attention', 'transformer'."
           },
           "date_from": {
             "type": "string",
-            "description": "Start date in YYYY-MM-DD format."
+            "description": "Start of date range in YYYY-MM-DD format (inclusive). Based on note creation date."
           },
           "date_to": {
             "type": "string",
-            "description": "End date in YYYY-MM-DD format."
+            "description": "End of date range in YYYY-MM-DD format (inclusive). For a single-day query, set date_from and date_to to the same value."
           }
         },
         "required": []
@@ -33,17 +33,17 @@
     "type": "function",
     "function": {
       "name": "get_note",
-      "description": "Retrieve a specific note by path or title.",
+      "description": "Retrieve the full content of a specific note by its exact title or file path. Use this when the user names a specific note. Title is the filename without extension and with underscores replaced by spaces (e.g. 'Self Attention' for Self_Attention.md). If the note is not found, use search_notes to discover the correct title first.",
       "parameters": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
-            "description": "File path of the note."
+            "description": "File path of the note, e.g. 'research/Transformers.md'. Use this if you already know the exact path."
           },
           "title": {
             "type": "string",
-            "description": "Title of the note."
+            "description": "Title of the note — the filename without .md extension, with underscores replaced by spaces. Example: 'CNN Architecture', 'Python Tips', 'Reinforcement Learning'."
           }
         },
         "required": []
@@ -54,22 +54,22 @@
     "type": "function",
     "function": {
       "name": "get_related_notes",
-      "description": "Find notes connected to a specific note through links.",
+      "description": "Find notes connected to a specific note through wiki-style [[links]]. Use this for queries about references, backlinks, or graph connections — e.g. 'what notes link to X?', 'what does X reference?', 'what is connected to X?'. Direction 'incoming' finds notes that link TO the given note (backlinks). Direction 'outgoing' finds notes that the given note links TO (its references/prerequisites). Direction 'both' returns all connected notes. Title must be the exact note title (filename without .md, underscores as spaces). Returns up to 10 results per direction.",
       "parameters": {
         "type": "object",
         "properties": {
           "path": {
             "type": "string",
-            "description": "File path of the note."
+            "description": "File path of the note, e.g. 'research/Transformers.md'."
           },
           "title": {
             "type": "string",
-            "description": "Title of the note."
+            "description": "Title of the note (filename without .md, underscores replaced by spaces). Example: 'Transformers', 'Attention Mechanisms', 'Paper Recommender'."
           },
           "direction": {
             "type": "string",
             "enum": ["outgoing", "incoming", "both"],
-            "description": "Which links to return.",
+            "description": "Which links to return. 'incoming' = notes that link TO this note. 'outgoing' = notes this note links TO. 'both' = all connected notes.",
             "default": "both"
           }
         },
@@ -81,11 +81,42 @@
     "type": "function",
     "function": {
       "name": "get_vault_overview",
-      "description": "Get vault statistics and recent notes.",
+      "description": "Get vault statistics (total notes, folder breakdown, tag counts) and the 5 most recently modified notes. Use this to orient when the user asks about the vault structure or recent activity.",
       "parameters": {
         "type": "object",
         "properties": {},
         "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "create_note",
+      "description": "Create a new markdown note in the vault. Use when the user asks to write, create, or synthesize a new note. The note is immediately searchable after creation. You may first retrieve existing notes with get_note or search_notes to gather content before writing the new note.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the new note. Use Title Case with spaces (e.g. 'Attention Survey', 'Project Status'). Do not include .md extension."
+          },
+          "folder": {
+            "type": "string",
+            "description": "Destination folder. Must be one of: research, projects, meetings, daily, reference.",
+            "enum": ["research", "projects", "meetings", "daily", "reference"]
+          },
+          "content": {
+            "type": "string",
+            "description": "Markdown body of the note. May include headings, lists, and wiki-style [[links]] to other notes."
+          },
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "List of lowercase tags, e.g. ['research', 'deep-learning'] or ['meeting', 'advisor']."
+          }
+        },
+        "required": ["title", "folder", "content"]
       }
     }
   }

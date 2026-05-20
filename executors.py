@@ -16,10 +16,11 @@ from search_backend import (
     get_recent_notes,
     search_by_tags,
     search_by_date,
+    create_note,
 )
 
 
-def create_executor_a(ix):
+def create_executor_a(ix, vault_path="vault"):
     """Executor for Config A (4 coarse-grained tools)."""
 
     def executor(tool_name: str, args: dict):
@@ -68,13 +69,22 @@ def create_executor_a(ix):
             recent = get_recent_notes(ix, limit=5)
             return {"stats": stats, "recent_notes": recent}
 
+        elif tool_name == "create_note":
+            return create_note(
+                ix, vault_path,
+                title=args["title"],
+                folder=args.get("folder", "research"),
+                content=args["content"],
+                tags=args.get("tags", []),
+            )
+
         else:
             return {"error": f"Unknown tool: {tool_name}"}
 
     return executor
 
 
-def create_executor_b(ix):
+def create_executor_b(ix, vault_path="vault"):
     """Executor for Config B (9 fine-grained tools)."""
 
     def executor(tool_name: str, args: dict):
@@ -106,6 +116,15 @@ def create_executor_b(ix):
 
         elif tool_name == "get_recent_notes":
             return get_recent_notes(ix, limit=args.get("limit", 10))
+
+        elif tool_name == "create_note":
+            return create_note(
+                ix, vault_path,
+                title=args["title"],
+                folder=args.get("folder", "research"),
+                content=args["content"],
+                tags=args.get("tags", []),
+            )
 
         else:
             return {"error": f"Unknown tool: {tool_name}"}

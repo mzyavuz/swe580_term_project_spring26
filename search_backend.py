@@ -311,6 +311,61 @@ def get_recent_notes(ix: index.Index, limit: int = DEFAULT_LIMIT) -> list[dict]:
         return [_hit_to_dict(r) for r in results]
 
 
+# ── Note Creation ───────────────────────────────────────────────────────────
+
+def create_note(
+    ix: index.Index,
+    vault_path: str,
+    title: str,
+    folder: str,
+    content: str,
+    tags: list[str] = None,
+) -> dict:
+    """Create a new markdown note in the vault and add it to the Whoosh index."""
+    filename = title.replace(" ", "_") + ".md"
+    folder_path = os.path.join(vault_path, folder)
+    os.makedirs(folder_path, exist_ok=True)
+    filepath = os.path.join(folder_path, filename)
+
+    now = datetime.now().isoformat(timespec="seconds")
+    tags_list = [t.lower() for t in (tags or [])]
+    tags_str = ",".join(tags_list)
+
+    frontmatter = f"---\ntags: [{', '.join(tags_list)}]\ncreated: {now}\nmodified: {now}\n---\n\n"
+    full_content = frontmatter + f"# {title}\n\n{content}"
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(full_content)
+
+    # Extract wiki-links from content and add to index immediately
+    links = re.findall(r"\[\[([^\]]+)\]\]", content)
+    links_str = ",".join(links)
+    created_dt = datetime.fromisoformat(now)
+    rel_path = f"{folder}/{filename}"
+
+    writer = ix.writer()
+    writer.update_document(
+        path=rel_path,
+        title=title,
+        content=content,
+        tags=tags_str,
+        created=created_dt,
+        modified=created_dt,
+        links=links_str,
+        folder=folder,
+    )
+    writer.commit()
+
+    return {
+        "path": rel_path,
+        "title": title,
+        "folder": folder,
+        "tags": tags_str,
+        "created": now,
+        "message": f"Note '{title}' created at {rel_path}",
+    }
+
+
 # ── Main (for testing) ──────────────────────────────────────────────────────
 
 if __name__ == "__main__":
